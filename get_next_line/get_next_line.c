@@ -6,11 +6,11 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:02:44 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/16 15:28:16 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/20 19:32:11 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	ft_bzero(void *s, size_t n)
 {

@@ -6,11 +6,11 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:03:07 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/16 15:25:47 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/21 18:59:24 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 char	*ft_strchr(char *str, int c)
 {

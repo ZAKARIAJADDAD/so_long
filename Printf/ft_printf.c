@@ -6,11 +6,11 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:05:29 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/15 14:25:20 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/20 19:21:37 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	check_arg(char c, va_list pr, int lent)
 {

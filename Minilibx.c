@@ -6,42 +6,73 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:20:55 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/16 20:51:02 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:59:09 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	mapping(t_vars *vars, t_data *img, t_map *mp)
+{
+	vars->y = -1;
+	while (mp->main_map[++vars->y])
+	{
+		vars->x = -1;
+		while (mp->main_map[vars->y][++vars->x])
+		{
+			mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image1, vars->x * CUB, vars->y * CUB);
+			if (mp->main_map[vars->y][vars->x] == '1')
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image, vars->x * CUB, vars->y * CUB);
+			else if (mp->main_map[vars->y][vars->x] == 'C')
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image4, vars->x * CUB, vars->y * CUB);
+			else if (mp->main_map[vars->y][vars->x] == 'P')
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image2, vars->x * CUB, vars->y * CUB);
+			else if (mp->main_map[vars->y][vars->x] == 'E')
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image3, vars->x * CUB, vars->y * CUB);
+		}
+	}
+}
+
+void	images(t_vars *vars, t_data *img)
+{
+	img->image = mlx_xpm_file_to_image(vars->mlx, "./Images/WAALL.xpm",
+			&img->width, &img->height);
+	img->image1 = mlx_xpm_file_to_image(vars->mlx, "./Images/GROUND_NN.xpm",
+			&img->width, &img->height);
+	img->image2 = mlx_xpm_file_to_image(vars->mlx, "./Images/EVILLL.xpm",
+			&img->width, &img->height);
+	img->image3 = mlx_xpm_file_to_image(vars->mlx, "./Images/EXIT_DOOR.xpm",
+			&img->width, &img->height);
+	img->image4 = mlx_xpm_file_to_image(vars->mlx, "./Images/AnyConv.com__samurai (1).xpm",
+				&img->width, &img->height);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	img;
-	char	*p_str;
-	int		i;
+	t_vars	vars;
+	t_map	mp;
 	
-	i = 0;
 	if (ac == 2)
 	{
-		img.mlx = mlx_init();
-		img.mlx_win = mlx_new_window(img.mlx, 1080, 600, "2D_Game");
-		img.image = mlx_xpm_file_to_image(img.mlx, "./Images/Back_S.xpm",
-				&img.width, &img.height);
-		mlx_put_image_to_window(img.mlx, img.mlx_win, img.image, 0, 0);
-		mlx_key_hook(img.mlx_win, pressnbr, (void *)0);
-		//mlx_string_put(img.mlx, img.mlx_win, 10, 10, 0xffffff,"Moves :");
-		
-		int	fd = open("./Map/map.ber", O_RDONLY);
-		p_str = get_next_line(fd);
-		while (p_str[i++])
+		if (check_map(av[1]) == 0)
 		{
-			if (p_str[i] == '1')
-				mlx_string_put(img.mlx, img.mlx_win, 10, 10, 0xffffff,"Moves :");
-			if (p_str[i] == '0')
-				mlx_string_put(img.mlx, img.mlx_win, 10, 10, 0xffffff,"Stop:");
+			ft_printf("Error !: Incorrect extention");
+			return(0);
 		}
-		
-		
-		mlx_hook(img.mlx_win, 17, 0, X_panel, (void *)0);
-		mlx_loop(img.mlx);
+		if (map_hndl(&mp) == 0)
+		{
+			ft_printf("Error !: Invalid map.");
+			return (0);
+		}
+		vars.mlx = mlx_init();
+		vars.mlx_win = mlx_new_window(vars.mlx, mp.x * CUB, mp.y * CUB, "2D_Game");
+		images(&vars, &img);
+		mapping(&vars, &img, &mp);
+		mlx_key_hook(vars.mlx_win, pressnbr, (void *)0);
+		mlx_string_put(vars.mlx, vars.mlx_win, 10, 10, 0xffffff,"Moves :");
+		mlx_hook(vars.mlx_win, 17, 0, X_panel, (void *)0);
+		mlx_loop(vars.mlx);
 	}
 	perror("Error !");
 	return (0);
