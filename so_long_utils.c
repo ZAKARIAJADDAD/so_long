@@ -6,32 +6,42 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:52:53 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/22 16:58:50 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/24 01:43:23 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	pressnbr(int key, void *param)
+int	pressnbr(int key, t_vars *vars)
 {
-	static int count;
-	t_data		img;
-	t_vars		vars;
+	static int	count;
 
 	if (key == 126 || key == 13)
-		ft_printf("Key Up N° [%d] Moves [%d]\n", key, ++count);
+	{
+		if (up_move(vars))
+			ft_printf("Key Up N° [%d] Moves [%d]\n", key, ++count);
+	}
 	else if (key == 125 || key == 1)
-		ft_printf("Key Down N° [%d] Moves [%d]\n", key, ++count);
+	{
+		if (down_move(vars))
+			ft_printf("Key Down N° [%d] Moves [%d]\n", key, ++count);
+	}
 	else if (key == 124 || key == 2)
-		ft_printf("Key Right N° [%d] Moves [%d]\n", key, ++count);
+	{
+		if (right_move(vars))
+			ft_printf("Key Right N° [%d] Moves [%d]\n", key, ++count);
+	}
 	else if (key == 123 || key == 0)
-		ft_printf("Key Left N° [%d] Moves [%d]\n", key, ++count);
-	 else if (key == 53)
-	 	exit(0);
+	{
+		if (left_move(vars))
+			ft_printf("Key Left N° [%d] Moves [%d]\n", key, ++count);
+	}
+	else if (key == 53)
+		exit(0);
 	return (0);
 }
 
-int	X_panel(int key, void *param)
+int	x_panel(int key, void *param)
 {
 	exit(0);
 	return (0);
@@ -49,8 +59,22 @@ int	check_map(char *p)
 	return (0);
 }
 
-void	printError(char *s)
+void	print_error(char *s)
 {
 	write(2, s, strlen(s));
 	exit(1);
+}
+
+void	check_ber_map_err(char **av, t_map *mp)
+{
+	if (check_map(av[1]) == 0)
+	{
+		ft_printf("Error !: Incorrect Extention");
+		exit(1);
+	}
+	if (map_hndl(mp, av) == 0)
+	{
+		ft_printf("Error !: Invalid map || No Such File or Directory.");
+		exit (1);
+	}
 }

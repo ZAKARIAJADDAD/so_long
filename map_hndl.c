@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_hndl.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/22 19:03:44 by zjaddad           #+#    #+#             */
+/*   Updated: 2022/12/22 21:29:44 by zjaddad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int	check_P_E_C(char **sp, t_player *plyr)
+int	check_p_e_c(char **sp, t_player *plyr)
 {
 	int	i;
 	int	j;
@@ -36,18 +48,17 @@ int	inside_square(char *isd)
 	i = 0;
 	while (isd[i])
 	{
-		
 		if (isd[0] != '1' || isd[ft_strlen(isd) - 1] != '1')
 			return (0);
 		else if (isd[i] != '1' && isd[i] != '0'
-		 && isd[i] != 'P' && isd[i] != 'E' && isd[i] != 'C')
+			&& isd[i] != 'P' && isd[i] != 'E' && isd[i] != 'C')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	check_square_map(char **one, t_map* mp)
+int	check_square_map(char **one, t_map *mp)
 {
 	int	i;
 	int	j;
@@ -61,14 +72,14 @@ int	check_square_map(char **one, t_map* mp)
 			while (one[i][j])
 			{
 				if (one[i][j] != '1')
-					printError("Error\nMap Not Surrounded With Walls OR Foreign Character\n");
+					print_error("Error!\nMissing Wall or Foreign Character");
 				j++;
 			}	
 		}
 		if (i > 0 || i < (mp->y - 1))
 		{
 			if (inside_square(one[i]) == 0)
-				printError("Error!\nMap Not Surrounded With Walls OR Foreign Character\n");
+				print_error("Error!\nMissing Wall or Foreign Character");
 		}
 		i++;
 	}
@@ -87,40 +98,37 @@ void	map_lent(char **s, t_map *mp)
 		while (s[i])
 		{
 			if (ft_strlen(s[i]) != first_line)
-				printError("Error\nMap Not Rectangle\n");
+				print_error("Error\nMap Not Rectangle\n");
 			i++;
 		}
 	}
 }
 
-int	map_hndl(t_map *mp)
+int	map_hndl(t_map *mp, char **av)
 {
 	char		*s;
 	t_player	plyr;
 
 	mp->x = 0;
 	mp->part = NULL;
-	mp->fd = open("./Map/map.ber", O_RDONLY);
+	mp->fd = open(av[1], O_RDONLY);
+	if (mp->fd == -1)
+		return (0);
 	while ((s = get_next_line(mp->fd)) != NULL)
 	{
 		mp->part = ft_strjoin(mp->part, s);
 		free(s);
 	}
-	while (mp->part[mp->x++])
-	{
-		if(mp->part[mp->x] == '\n' && mp->part[mp->x + 1] == '\n')
-			return (0);
-	}
+	check_nwline(mp->part);
 	mp->main_map = ft_split(mp->part, '\n');
-	mp->y = 0;
-	while (mp->main_map[mp->y])
+	mp->y = -1;
+	while (mp->main_map[++mp->y])
 	{
 		mp->x = 0;
 		while (mp->main_map[mp->y][mp->x])
 			mp->x++;
-		mp->y++;
 	}
 	map_lent(mp->main_map, mp);
-	mp->check_lent = check_P_E_C(mp->main_map, &plyr);
+	mp->check_lent = check_p_e_c(mp->main_map, &plyr);
 	return (mp->check_lent);
 }

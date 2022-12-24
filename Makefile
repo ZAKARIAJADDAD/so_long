@@ -6,7 +6,7 @@
 #    By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 18:38:22 by zjaddad           #+#    #+#              #
-#    Updated: 2022/12/20 20:53:26 by zjaddad          ###   ########.fr        #
+#    Updated: 2022/12/22 23:46:38 by zjaddad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FRAMEWORK= -lmlx -framework OpenGL -framework AppKit
 SRCS=	Libft/ft_strdup.c Libft/ft_substr.c Libft/ft_strncmp.c Libft/ft_split.c \
 		Printf/ft_printf.c Printf/ft_printf_utils.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-		so_long_utils.c map_hndl.c
+		so_long_utils.c so_long_utils_1.c map_hndl.c movements.c
 
 NAME= so_long.a
 
