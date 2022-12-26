@@ -6,14 +6,14 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:53:22 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/24 01:45:48 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/26 15:36:40 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define WEIGHT
-# define HIGHT
+# define CNT
+// # define HIGHT
 # define CUB 80
 
 # ifndef BUFFER_SIZE
@@ -39,6 +39,12 @@ typedef struct s_data {
 	void	*image2;
 	void	*image3;
 	void	*image4;
+	void	*ext_opn;
+	void	*coins[6];
+	void	*enmy[8];
+	void	*rip;
+	void	*left_player;
+	void	*game_over;
 
 }	t_data;
 
@@ -51,6 +57,8 @@ typedef struct player {
 	int	p_check;
 	int	ext_check;
 	int	collect;
+	int	exit_y;
+	int	exit_x;
 }	t_player;
 
 typedef struct map {
@@ -63,14 +71,18 @@ typedef struct map {
 }	t_map;
 
 typedef struct t_init {
-	void	*mlx;
-	void	*mlx_win;
-	int		x;
-	int		y;
-	int		fd;
-	t_data	img;
-	t_player player;
-	t_map	map;
+	void		*mlx;
+	void		*mlx_win;
+	int			x;
+	int			y;
+	int			fd;
+	int			playerlose;
+	int			timer;
+	int			index;
+	int			idx;
+	t_data		img;
+	t_player	player;
+	t_map		map;
 }	t_vars;
 
 //Struct/////////////////////////////////
@@ -84,12 +96,18 @@ void	print_error(char *s);
 void	check_ber_map_err(char **av, t_map *mp);
 void	check_nwline(char *t);
 void	player_postion(t_map *mp, t_player *ps);
-void	check_keys(int	key);
-int		up_move(t_vars *vars);
-int		down_move(t_vars *vars);
-int		left_move(t_vars *vars);
-int		right_move(t_vars *vars);
+void	check_keys(int key);
 void	coin_postion(t_map *mp, t_player *ps);
+void	exit_position(t_map *mp, t_player *ps);
+int		to_up(t_vars *vars);
+int		to_down(t_vars *vars);
+int		to_left(t_vars *vars);
+int		to_right(t_vars *vars);
+int		render(t_vars *vars);
+void	hight_wight_mp(t_map *mp);
+void	prints_moves(t_vars *vars, int count);
+void	exit_win(void);
+void	death(t_vars *vars, int x, int y);
 
 //printf functions///////////////////////////////
 int		ft_putchar(char c);
@@ -115,6 +133,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
+char	*ft_itoa(int n);
 //End Libft functions/////////////////////////////
 
 #endif

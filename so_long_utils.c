@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:52:53 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/24 01:43:23 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/25 21:17:00 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,29 @@ int	pressnbr(int key, t_vars *vars)
 {
 	static int	count;
 
-	if (key == 126 || key == 13)
+	if ((key == 126 || key == 13) && !vars->playerlose)
 	{
-		if (up_move(vars))
+		if (to_up(vars))
 			ft_printf("Key Up N° [%d] Moves [%d]\n", key, ++count);
 	}
-	else if (key == 125 || key == 1)
+	else if ((key == 125 || key == 1) && !vars->playerlose)
 	{
-		if (down_move(vars))
+		if (to_down(vars))
 			ft_printf("Key Down N° [%d] Moves [%d]\n", key, ++count);
 	}
-	else if (key == 124 || key == 2)
+	else if ((key == 124 || key == 2) && !vars->playerlose)
 	{
-		if (right_move(vars))
+		if (to_right(vars))
 			ft_printf("Key Right N° [%d] Moves [%d]\n", key, ++count);
 	}
-	else if (key == 123 || key == 0)
+	else if ((key == 123 || key == 0) && !vars->playerlose)
 	{
-		if (left_move(vars))
+		if (to_left(vars))
 			ft_printf("Key Left N° [%d] Moves [%d]\n", key, ++count);
 	}
 	else if (key == 53)
 		exit(0);
-	return (0);
+	return (prints_moves(vars, count), 0);
 }
 
 int	x_panel(int key, void *param)

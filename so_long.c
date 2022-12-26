@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:20:55 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/24 01:47:46 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/26 15:28:53 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	mapping(t_vars *vars, t_data *img, t_map *mp)
 			if (mp->main_map[vars->y][vars->x] == '1')
 				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image,
 					vars->x * CUB, vars->y * CUB);
-			else if (mp->main_map[vars->y][vars->x] == 'C')
-				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image4,
-					vars->x * CUB, vars->y * CUB);
 			else if (mp->main_map[vars->y][vars->x] == 'P')
 				mlx_put_image_to_window(vars->mlx, vars->mlx_win, img->image2,
 					vars->x * CUB, vars->y * CUB);
@@ -40,15 +37,57 @@ void	mapping(t_vars *vars, t_data *img, t_map *mp)
 
 void	images(t_vars *vars)
 {
-	vars->img.image = mlx_xpm_file_to_image(vars->mlx, "./Images/VOOOLKAN.xpm",
+	vars->img.image = mlx_xpm_file_to_image(vars->mlx, "./Images/WOL.xpm",
 			&(vars->img.width), &(vars->img.height));
-	vars->img.image1 = mlx_xpm_file_to_image(vars->mlx, "./Images/GRRRRRRR.xpm",
+	vars->img.image1 = mlx_xpm_file_to_image(vars->mlx, "./Images/grb.xpm",
 			&(vars->img.width), &(vars->img.height));
 	vars->img.image2 = mlx_xpm_file_to_image(vars->mlx,
-			"./Images/75_CHARACTER.xpm", &(vars->img.width), &vars->img.height);
-	vars->img.image3 = mlx_xpm_file_to_image(vars->mlx, "./Images/exit.xpm",
+			"./Images/PLAYER.xpm", &(vars->img.width), &vars->img.height);
+	vars->img.left_player = mlx_xpm_file_to_image(vars->mlx,
+			"./Images/PLAYER_LEFT.xpm", &(vars->img.width), &vars->img.height);
+	vars->img.image3 = mlx_xpm_file_to_image(vars->mlx,
+			"./Images/EXITO_CLS.xpm", &(vars->img.width), &vars->img.height);
+	vars->img.ext_opn = mlx_xpm_file_to_image(vars->mlx,
+			"./Images/EXITO_OPN.xpm", &(vars->img.width), &vars->img.height);
+	vars->img.rip = mlx_xpm_file_to_image(vars->mlx, "./Images/RIP.xpm",
 			&(vars->img.width), &vars->img.height);
-	vars->img.image4 = mlx_xpm_file_to_image(vars->mlx, "./Images/coin.xpm",
+	vars->img.game_over = mlx_xpm_file_to_image(vars->mlx,
+			"./Images/GAME_OVER.xpm", &(vars->img.width), &vars->img.height);
+}
+
+void	image_coin(t_vars *vars)
+{
+	vars->img.coins[0] = mlx_xpm_file_to_image(vars->mlx, "./Images/COINS.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.coins[1] = mlx_xpm_file_to_image(vars->mlx, "./Images/501.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.coins[2] = mlx_xpm_file_to_image(vars->mlx, "./Images/502.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.coins[3] = mlx_xpm_file_to_image(vars->mlx, "./Images/503.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.coins[4] = mlx_xpm_file_to_image(vars->mlx, "./Images/504.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.coins[5] = mlx_xpm_file_to_image(vars->mlx, "./Images/505.xpm",
+			&(vars->img.width), &vars->img.height);
+}
+
+void	image_enmy(t_vars *vars)
+{
+	vars->img.enmy[0] = mlx_xpm_file_to_image(vars->mlx, "./Images/N1.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[1] = mlx_xpm_file_to_image(vars->mlx, "./Images/N2.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[2] = mlx_xpm_file_to_image(vars->mlx, "./Images/N3.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[3] = mlx_xpm_file_to_image(vars->mlx, "./Images/N4.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[4] = mlx_xpm_file_to_image(vars->mlx, "./Images/N5.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[5] = mlx_xpm_file_to_image(vars->mlx, "./Images/N6.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[6] = mlx_xpm_file_to_image(vars->mlx, "./Images/N7.xpm",
+			&(vars->img.width), &vars->img.height);
+	vars->img.enmy[7] = mlx_xpm_file_to_image(vars->mlx, "./Images/N8.xpm",
 			&(vars->img.width), &vars->img.height);
 }
 
@@ -56,21 +95,27 @@ int	main(int ac, char **av)
 {
 	t_vars		vars;
 
+	vars.index = 0;
+	vars.idx = 0;
+	vars.timer = 0;
+	vars.playerlose = 0;
 	if (ac == 2)
 	{
-		check_ber_map_err(av,&(vars.map));
+		check_ber_map_err(av, &(vars.map));
 		vars.mlx = mlx_init();
 		vars.mlx_win = mlx_new_window(vars.mlx, vars.map.x * CUB,
 				vars.map.y * CUB, "2D_Game");
 		images(&vars);
+		image_coin(&vars);
+		image_enmy(&vars);
 		mapping(&vars, &(vars.img), &(vars.map));
 		player_postion(&(vars.map), &(vars.player));
 		coin_postion(&(vars.map), &(vars.player));
-		mlx_key_hook(vars.mlx_win, pressnbr, &vars);
-		mlx_string_put(vars.mlx, vars.mlx_win, 10, 10, 0xffffff, "Moves :");
+		exit_position(&(vars.map), &(vars.player));
+		mlx_hook(vars.mlx_win, 2, 0, pressnbr, &vars);
 		mlx_hook(vars.mlx_win, 17, 0, x_panel, (void *)0);
+		mlx_loop_hook(vars.mlx, render, &vars);
 		mlx_loop(vars.mlx);
 	}
 	perror("Error !");
-	return (0);
 }

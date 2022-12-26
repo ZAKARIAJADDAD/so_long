@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:03:44 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/22 21:29:44 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/25 18:27:24 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	inside_square(char *isd)
 		if (isd[0] != '1' || isd[ft_strlen(isd) - 1] != '1')
 			return (0);
 		else if (isd[i] != '1' && isd[i] != '0'
-			&& isd[i] != 'P' && isd[i] != 'E' && isd[i] != 'C')
+			&& isd[i] != 'P' && isd[i] != 'E' && isd[i] != 'C'
+			&& isd[i] != 'N')
 			return (0);
 		i++;
 	}
@@ -109,25 +110,20 @@ int	map_hndl(t_map *mp, char **av)
 	char		*s;
 	t_player	plyr;
 
-	mp->x = 0;
 	mp->part = NULL;
 	mp->fd = open(av[1], O_RDONLY);
 	if (mp->fd == -1)
 		return (0);
-	while ((s = get_next_line(mp->fd)) != NULL)
+	s = get_next_line(mp->fd);
+	while (s != NULL)
 	{
 		mp->part = ft_strjoin(mp->part, s);
 		free(s);
+		s = get_next_line(mp->fd);
 	}
 	check_nwline(mp->part);
 	mp->main_map = ft_split(mp->part, '\n');
-	mp->y = -1;
-	while (mp->main_map[++mp->y])
-	{
-		mp->x = 0;
-		while (mp->main_map[mp->y][mp->x])
-			mp->x++;
-	}
+	hight_wight_mp(mp);
 	map_lent(mp->main_map, mp);
 	mp->check_lent = check_p_e_c(mp->main_map, &plyr);
 	return (mp->check_lent);
