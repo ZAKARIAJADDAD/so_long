@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 23:12:54 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/26 15:36:48 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/26 23:40:16 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	to_left(t_vars *vars)
 	{
 		mlx_put_image_to_window(vars->mlx, vars->mlx_win, (vars->img).image1,
 			vars->player.x * CUB, vars->player.y * CUB);
-		mlx_put_image_to_window(vars->mlx, vars->mlx_win, (vars->img).left_player,
+		mlx_put_image_to_window(vars->mlx, vars->mlx_win,
+			(vars->img).left_player,
 			(vars->player.x * CUB - CUB), (vars->player.y * CUB));
 		(vars->player.x) -= 1;
 		return (1);

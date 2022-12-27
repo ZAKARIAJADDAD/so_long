@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:03:44 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/25 18:27:24 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 13:58:21 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	check_square_map(char **one, t_map *mp)
 
 void	map_lent(char **s, t_map *mp)
 {
-	int	i;
-	int	first_line;
+	int		i;
+	size_t	first_line;
 
 	i = 1;
 	if (check_square_map(s, mp))
@@ -123,8 +123,13 @@ int	map_hndl(t_map *mp, char **av)
 	}
 	check_nwline(mp->part);
 	mp->main_map = ft_split(mp->part, '\n');
+	coin_postion(mp, &(mp->plyr));
+	player_postion(mp, &(mp->plyr));
 	hight_wight_mp(mp);
 	map_lent(mp->main_map, mp);
+	mp->count_exit = 0;
+	mp->count_collectibles = 0;
 	mp->check_lent = check_p_e_c(mp->main_map, &plyr);
+	check_path(mp);
 	return (mp->check_lent);
 }

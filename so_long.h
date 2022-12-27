@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:53:22 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/26 15:36:40 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:38:14 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,19 @@ typedef struct player {
 }	t_player;
 
 typedef struct map {
-	char	**main_map;
-	char	*part;
-	int		check_lent;
-	int		y;
-	int		x;
-	int		fd;
+	char		**main_map;
+	char		*part;
+	int			check_lent;
+	int			y;
+	int			x;
+	char		**fk_map_e;
+	char		**fk_map_c;
+	int			fake_coin;
+	int			fake_ext;
+	int			fd;
+	int			count_exit;
+	int			count_collectibles;
+	t_player	plyr;
 }	t_map;
 
 typedef struct t_init {
@@ -88,7 +95,7 @@ typedef struct t_init {
 //Struct/////////////////////////////////
 
 int		pressnbr(int key, t_vars *vars);
-int		x_panel(int key, void *param);
+int		x_panel(void);
 int		check_map(char *p);
 int		map_hndl(t_map *mp, char **av);
 void	map_lent(char **s, t_map *mp);
@@ -108,6 +115,7 @@ void	hight_wight_mp(t_map *mp);
 void	prints_moves(t_vars *vars, int count);
 void	exit_win(void);
 void	death(t_vars *vars, int x, int y);
+void	check_path(t_map *mp);
 
 //printf functions///////////////////////////////
 int		ft_putchar(char c);
@@ -131,7 +139,6 @@ void	ft_bzero(void *s, size_t n);
 //Libft functions////////////////////////////////
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s1);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 char	*ft_itoa(int n);
 //End Libft functions/////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:51:18 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/26 16:12:56 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/26 23:42:15 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	render_coins(t_vars *vars)
 		{
 			if (vars->map.main_map[y][x] == 'C')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->mlx_win, (vars->img).image1,
-					x * CUB, y * CUB);
-				mlx_put_image_to_window(vars->mlx, vars->mlx_win, 
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win,
+					(vars->img).image1, x * CUB, y * CUB);
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win,
 					vars->img.coins[vars->index], x * CUB, y * CUB);
 			}
 			x++;
@@ -75,9 +75,9 @@ void	render_enmy(t_vars *vars)
 		{
 			if (vars->map.main_map[y][x] == 'N')
 			{
-				mlx_put_image_to_window(vars->mlx, vars->mlx_win, (vars->img).image1,
-					x * CUB, y * CUB);
-				mlx_put_image_to_window(vars->mlx, vars->mlx_win, 
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win,
+					(vars->img).image1, x * CUB, y * CUB);
+				mlx_put_image_to_window(vars->mlx, vars->mlx_win,
 					vars->img.enmy[vars->idx], x * CUB, y * CUB);
 			}
 			x++;

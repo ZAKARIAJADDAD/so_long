@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:52:53 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/25 21:17:00 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 13:57:28 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	pressnbr(int key, t_vars *vars)
 	return (prints_moves(vars, count), 0);
 }
 
-int	x_panel(int key, void *param)
+int	x_panel(void)
 {
 	exit(0);
 	return (0);
