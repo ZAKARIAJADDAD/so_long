@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:03:44 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/27 13:58:21 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 19:55:18 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	map_lent(char **s, t_map *mp)
 		while (s[i])
 		{
 			if (ft_strlen(s[i]) != first_line)
-				print_error("Error\nMap Not Rectangle\n");
+				print_error("Error\nMap Not Rectangle.");
 			i++;
 		}
 	}

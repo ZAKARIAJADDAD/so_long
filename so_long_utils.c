@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:52:53 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/27 13:57:28 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 19:24:41 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	check_ber_map_err(char **av, t_map *mp)
 {
 	if (check_map(av[1]) == 0)
 	{
-		ft_printf("Error !: Incorrect Extention");
+		ft_printf("Error !\nIncorrect Extention");
 		exit(1);
 	}
 	if (map_hndl(mp, av) == 0)
 	{
-		ft_printf("Error !: Invalid map || No Such File or Directory.");
+		ft_printf("Error !\nInvalid map || No Such File or Directory.");
 		exit (1);
 	}
 }

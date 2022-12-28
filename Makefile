@@ -6,7 +6,7 @@
 #    By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 18:38:22 by zjaddad           #+#    #+#              #
-#    Updated: 2022/12/27 15:57:15 by zjaddad          ###   ########.fr        #
+#    Updated: 2022/12/27 19:47:29 by zjaddad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ OBJS= $(SRCS:.c=.o)
 all:$(NAME)
 
 $(NAME):$(OBJS)
-	$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJS) $(FRAMEWORK) -o $(NAME)
 
 %.o:%.c
-	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

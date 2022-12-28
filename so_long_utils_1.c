@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:03:55 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/25 18:36:41 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 19:27:47 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_nwline(char *t)
 	{
 		if (t[i] == '\n' && t[i + 1] == '\n')
 		{
-			ft_printf("Error !: Invalid map");
+			ft_printf("Error !\nInvalid map");
 			exit(1);
 		}
 		i++;

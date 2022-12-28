@@ -6,7 +6,7 @@
 /*   By: zjaddad <zjaddad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 22:20:55 by zjaddad           #+#    #+#             */
-/*   Updated: 2022/12/27 14:56:08 by zjaddad          ###   ########.fr       */
+/*   Updated: 2022/12/27 21:13:54 by zjaddad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int ac, char **av)
 	vars.idx = 0;
 	vars.timer = 0;
 	vars.playerlose = 0;
-	if (ac >= 1)
+	if (ac == 2)
 	{
 		check_ber_map_err(av, &(vars.map));
 		vars.mlx = mlx_init();
@@ -117,5 +117,5 @@ int	main(int ac, char **av)
 		mlx_loop_hook(vars.mlx, render, &vars);
 		mlx_loop(vars.mlx);
 	}
-	perror("Error !");
+	perror("Error !\n");
 }
